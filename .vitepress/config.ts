@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress';
 
-const SITE_URL = 'https://docs-blackhole.vercel.app/';
+/** Production host: the Vercel project tracks this repository's `main` branch. */
+const SITE_URL = 'https://galaxy-blackhole.vercel.app/';
 
 const en = {
   label: 'English',
