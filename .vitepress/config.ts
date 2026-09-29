@@ -112,6 +112,8 @@ const vi = {
 export default defineConfig({
   cleanUrls: true,
   lastUpdated: true,
+  // The repository README documents the docs site itself; it is not a published page.
+  srcExclude: ['README.md'],
   locales: { root: en, vi },
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
