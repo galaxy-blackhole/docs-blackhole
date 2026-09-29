@@ -1,0 +1,17 @@
+{
+  "name": "docs-blackhole",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Documentation site for Galaxy Blackhole: the blackhole CLI, the ai-coder-core runtime, the web GUI, and the delivery journey.",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "docs:build": "vitepress build",
+    "preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4",
+    "vue": "^3.4.0"
+  }
+}
