@@ -46,8 +46,19 @@ Gõ `/` trong ô nhập để mở menu:
   chứ không nằm im trong log.
 - Cuối mỗi lượt có footer: thương hiệu provider, model, mức suy luận, token, thời gian.
 
+## Ô soạn thảo (composer)
+
+- Con trỏ terminal gốc được đặt đúng chỗ để preedit của IME (gõ tiếng Việt) hiện ngay trong
+  ô nhập.
+- Prompt dài sẽ xuống dòng thay vì cuộn mất phần header; panel trợ giúp được cắt theo chiều
+  cao viewport nên tiêu đề của nó không bao giờ bị che.
+- Chỉ mục file trong workspace hoàn tất đường dẫn, nên bạn tham chiếu một file mà không cần
+  rời ô soạn thảo.
+
 ## Ghi log trong lúc làm việc
 
 TUI ghi cùng loại JSON lines như mọi lệnh khác — chuyển trạng thái run, lỗi tool kèm
 stack, retry model, lỗi MCP — vào `<state-dir>/logs/cli-<ngày>.ndjson`.
 `blackhole logs [n]` in các dòng mới nhất; đây là thứ nên gửi kèm khi báo lỗi.
+
+Tiếp theo: [flow và kiểm chứng end-to-end](/vi/guide/flow-and-e2e).

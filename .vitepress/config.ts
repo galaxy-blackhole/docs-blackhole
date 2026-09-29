@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress';
 
+const SITE_URL = 'https://docs-blackhole.vercel.app/';
+
 const en = {
   label: 'English',
   lang: 'en',
@@ -17,25 +19,83 @@ const vi = {
     'Galaxy Blackhole: CLI/TUI blackhole, runtime ai-coder-core, web GUI và hành trình giao hàng (delivery journey).',
   themeConfig: {
     nav: [
-      { text: 'Nhập môn', link: '/vi/guide/getting-started' },
-      { text: 'Lệnh CLI', link: '/vi/cli/' },
-      { text: 'English', link: '/' },
+      { text: 'Nhập môn', link: '/vi/guide/introduction' },
+      { text: 'CLI', link: '/vi/cli/' },
+      { text: 'Web & hành trình', link: '/vi/web/' },
+      { text: 'Core', link: '/vi/core/' },
+      { text: 'Hệ sinh thái', link: '/vi/ecosystem/versions' },
+      { text: 'Tham chiếu', link: '/vi/reference/release-policy' },
     ],
     sidebar: {
       '/vi/guide/': [
         {
-          text: 'Nhập môn',
+          text: 'Bắt đầu',
           items: [
-            { text: 'Giới thiệu', link: '/vi/' },
+            { text: 'Giới thiệu', link: '/vi/guide/introduction' },
             { text: 'Cài đặt và cấu hình', link: '/vi/guide/getting-started' },
+            { text: 'Tham chiếu cấu hình', link: '/vi/guide/configuration' },
+          ],
+        },
+        {
+          text: 'Hằng ngày',
+          items: [
             { text: 'Giao diện dòng lệnh', link: '/vi/guide/tui' },
+            { text: 'Flow và kiểm chứng E2E', link: '/vi/guide/flow-and-e2e' },
+            { text: 'Xử lý sự cố', link: '/vi/guide/troubleshooting' },
           ],
         },
       ],
       '/vi/cli/': [
         {
           text: 'Lệnh',
-          items: [{ text: 'Tổng quan', link: '/vi/cli/' }],
+          items: [
+            { text: 'Tổng quan', link: '/vi/cli/' },
+            { text: 'Lệnh và cờ', link: '/vi/cli/commands' },
+            { text: 'Memory', link: '/vi/cli/memory' },
+            { text: 'Skills', link: '/vi/cli/skills' },
+            { text: 'MCP server', link: '/vi/cli/mcp' },
+            { text: 'Web GUI', link: '/vi/cli/web' },
+          ],
+        },
+      ],
+      '/vi/web/': [
+        {
+          text: 'Web GUI',
+          items: [
+            { text: 'Tổng quan', link: '/vi/web/' },
+            { text: 'Hành trình giao hàng', link: '/vi/web/journey' },
+          ],
+        },
+      ],
+      '/vi/core/': [
+        {
+          text: 'Runtime',
+          items: [
+            { text: 'Kiến trúc', link: '/vi/core/' },
+            { text: 'Bằng chứng và completion gate', link: '/vi/core/evidence' },
+            { text: 'Context và caching', link: '/vi/core/context' },
+            { text: 'Tool, guard và advisory', link: '/vi/core/tools' },
+          ],
+        },
+      ],
+      '/vi/ecosystem/': [
+        {
+          text: 'Hệ sinh thái',
+          items: [
+            { text: 'Bảng phiên bản', link: '/vi/ecosystem/versions' },
+            { text: 'VS Code extension', link: '/vi/ecosystem/vscode' },
+            { text: 'Retrieval core', link: '/vi/ecosystem/retrieval' },
+          ],
+        },
+      ],
+      '/vi/reference/': [
+        {
+          text: 'Tham chiếu',
+          items: [
+            { text: 'Chính sách release', link: '/vi/reference/release-policy' },
+            { text: 'Nhật ký lỗi', link: '/vi/reference/failure-journal' },
+            { text: 'Changelog', link: '/vi/reference/changelogs' },
+          ],
         },
       ],
     },
@@ -56,7 +116,19 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     ['meta', { name: 'theme-color', content: '#0b0a14' }],
   ],
-  sitemap: { hostname: 'https://docs-blackhole.vercel.app' },
+  sitemap: { hostname: SITE_URL },
+  transformHead({ pageData }) {
+    // Every page exists in both locales, so advertise the pair explicitly.
+    const relative = pageData.relativePath.replace(/(?:index)?\.md$/, '');
+    const shared = relative.replace(/^vi\//, '');
+    const english = new URL(shared, SITE_URL).href;
+    const vietnamese = new URL(`vi/${shared}`, SITE_URL).href;
+    return [
+      ['link', { rel: 'alternate', hreflang: 'en', href: english }],
+      ['link', { rel: 'alternate', hreflang: 'vi', href: vietnamese }],
+      ['link', { rel: 'alternate', hreflang: 'x-default', href: english }],
+    ];
+  },
   themeConfig: {
     logo: '/logo.svg',
     editLink: {

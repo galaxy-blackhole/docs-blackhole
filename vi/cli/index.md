@@ -32,6 +32,9 @@
 --flow-from <step-id> --flow-until <step-id> --flow-step-retries <n>
 ```
 
+Mô tả đầy đủ: [lệnh và cờ](/vi/cli/commands) và
+[tham chiếu cấu hình](/vi/guide/configuration).
+
 ## Mã thoát
 
 | Mã | Ý nghĩa |
@@ -43,15 +46,14 @@
 Run bị huỷ **không phải** run thất bại: session, memory và workspace vẫn dùng được, và
 flow có thể chạy tiếp bằng `--flow-from`.
 
-## Memory trong một câu
-
-Agent **đề xuất** quy ước (trạng thái `candidate`), bạn **xác nhận** thì mới thành
-`confirmed` và được recall; mọi thay đổi đều tăng revision và giữ lịch sử. Chi tiết đầy
-đủ ở [trang memory tiếng Anh](/cli/memory).
-
 ## Log
 
 ```sh
 blackhole logs 20
 tail -f ~/.galaxy/agent/logs/cli-$(date +%F).ndjson
 ```
+
+Mỗi dòng là một JSON line: vòng đời lệnh, chuyển trạng thái run, lỗi tool kèm stack, retry
+model, lỗi kết nối MCP, sự kiện OAuth và crash. Secret được che trước khi dòng đó được ghi.
+
+Tiếp theo: [lệnh và cờ](/vi/cli/commands).
